@@ -19,7 +19,7 @@ DEVICE_PATH := device/samsung/m32
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
-
+TARGET_SUPPORTS_64_BIT_APPS := true
 # Bootloader
 BOARD_VENDOR := samsung
 TARGET_SOC := k69v1_64_titan
@@ -93,11 +93,16 @@ BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/bootimg.mk
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+TW_NO_EXFAT_FUSE := true
+TW_LOAD_VENDOR_MODULES := "texfat.ko tntfs.ko"
 
 # Partitions
+
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 50331648
+BOARD_DTBOIMG_PARTITION_SIZE := 10485760
 
 # Dynamic Partitions
 BOARD_SUPER_PARTITION_SIZE := 7642021888
@@ -127,11 +132,13 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flag 2
 # Crypto
 PLATFORM_SECURITY_PATCH := 2025-11-05
 VENDOR_SECURITY_PATCH := 2025-11-05
-PLATFORM_VERSION := 11
+PLATFORM_VERSION := 127
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 TW_INCLUDE_CRYPTO := false
 TW_INCLUDE_CRYPTO_FBE := false
 TW_INCLUDE_FBE_METADATA_DECRYPT := false
 BOARD_USES_METADATA_PARTITION := true
+TW_OVERRIDE_SYSTEM_PROPS := \ "ro.build.date.utc;ro.bootimage.build.date.utc=ro.build.date.utc;ro.odm.build.date.utc=ro.build.date.utc;ro.product.build.date.utc=ro.build.date.utc;ro.system.build.date.utc=ro.build.date.utc;ro.system_ext.build.date.utc=ro.build.date.utc;ro.vendor.build.date.utc=ro.build.date.utc;ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
 
 # TWRP specific build flags
 #TW_DEVICE_VERSION := 4_afaneh92

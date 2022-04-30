@@ -31,7 +31,12 @@ $(call inherit-product, $(DEVICE_PATH)/device.mk)
 PRODUCT_PACKAGES += \
     charger_res_images
 
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root,recovery/root)
+PRODUCT_COPY_FILES += \
+        $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root,recovery/root) \
+        $(call find-copy-subdir-files,*.ko,$(DEVICE_PATH)/prebuilt/lib,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1)
+
+PRODUCT_COPY_FILES += \
+	$(DEVICE_PATH)/prebuilt/dtbo.img:dtbo
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := twrp_m32
